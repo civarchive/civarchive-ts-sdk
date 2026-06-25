@@ -1,0 +1,56 @@
+name: Generate SDK
+# Two-repo flow: the OpenAPI spec + Stainless config live in civarchive-api
+# (the single source of truth). This workflow fetches them, regenerates src/ with
+# opensteel, and opens a pull request. Merging that PR (with a conventional-commit
+# title) feeds release-please in release.yml.
+#
+# Trigger: the manual "Run workflow" button, or the daily schedule. To make it
+# instant on a spec change, add a repository_dispatch from civarchive-api that
+# fires this workflow (a trigger-only token — it never needs push access here).
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  generate:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch spec + config from civarchive-api (single source of truth)
+        run: |
+          base=https://raw.githubusercontent.com/civarchive/civarchive-api/master
+          curl -fsSL -o openapi.yaml  "$base/openapi.yaml"
+          curl -fsSL -o stainless.yml "$base/stainless.yml"
+
+      # Pin a specific opensteel version for reproducible output, e.g. opensteel@0.1.1.
+      # generate owns only src/: emit to a staging dir, sync src/ back, then drop the
+      # fetched spec so it is never committed here.
+      - name: Regenerate src/
+        run: |
+          npx --yes opensteel generate --openapi openapi.yaml --config stainless.yml --out .opensteel-gen
+          rsync -a --delete .opensteel-gen/src/ src/
+          rm -rf .opensteel-gen openapi.yaml stainless.yml
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'feat: regenerate SDK from updated spec'
+          title: 'feat: regenerate SDK from updated spec'
+          body: |
+            Automated regeneration from the OpenAPI spec / Stainless config in
+            [civarchive-api](https://github.com/civarchive/civarchive-api).
+
+            Review the `src/` diff, then merge to let release-please cut a release.
+          branch: opensteel/regenerate
+          delete-branch: true

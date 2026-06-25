@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Running eslint"
+./node_modules/.bin/eslint .
+
+echo "==> Building"
+./scripts/build
+
+echo "==> Checking types"
+./node_modules/typescript/bin/tsc

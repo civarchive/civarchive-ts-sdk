@@ -1,0 +1,18 @@
+.prism.log
+.stdy.log
+node_modules
+yarn-error.log
+codegen.log
+dist
+dist-deno
+/*.tgz
+.idea/
+.eslintcache
+dist-bundle
+oidc
+
+# spec/config live in civarchive-api (fetched at generate time)
+openapi.yaml
+stainless.yml
+stainless-config.yml
+.opensteel/
