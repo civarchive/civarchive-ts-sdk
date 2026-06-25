@@ -43,9 +43,8 @@ jobs:
       - name: Publish to npm
         if: ${{ steps.release.outputs.release_created }}
         working-directory: dist
-        # Uses npm OIDC Trusted Publishing (no NPM_TOKEN) when the package has a
-        # Trusted Publisher configured for this repo + workflow. Otherwise set an
-        # NPM_TOKEN secret and uncomment the env block below.
+        # Authenticates with the NPM_TOKEN repository secret; --provenance still
+        # attaches a build attestation (id-token: write is granted above).
         run: npm publish --provenance --access public
-        # env:
-        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
