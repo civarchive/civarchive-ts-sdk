@@ -39,15 +39,7 @@ declare const Deno: any;
 declare const EdgeRuntime: any;
 type Arch = 'x32' | 'x64' | 'arm' | 'arm64' | `other:${string}` | 'unknown';
 type PlatformName =
-  | 'MacOS'
-  | 'Linux'
-  | 'Windows'
-  | 'FreeBSD'
-  | 'OpenBSD'
-  | 'iOS'
-  | 'Android'
-  | `Other:${string}`
-  | 'Unknown';
+  'MacOS' | 'Linux' | 'Windows' | 'FreeBSD' | 'OpenBSD' | 'iOS' | 'Android' | `Other:${string}` | 'Unknown';
 type Browser = 'ie' | 'edge' | 'chrome' | 'firefox' | 'safari';
 type PlatformProperties = {
   'X-Stainless-Lang': 'js';
