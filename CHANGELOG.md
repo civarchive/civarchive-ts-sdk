@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/civarchive/civarchive-ts-sdk/compare/v1.1.0...v1.1.1) (2026-07-02)
+
+
+### Bug Fixes
+
+* republish (1.1.0 release never reached npm) ([7536444](https://github.com/civarchive/civarchive-ts-sdk/commit/75364449e2ff4caecd540f58fab08791d12d5cf2))
+
 ## [1.1.0](https://github.com/civarchive/civarchive-ts-sdk/compare/v1.0.0...v1.1.0) (2026-07-02)
 
 
