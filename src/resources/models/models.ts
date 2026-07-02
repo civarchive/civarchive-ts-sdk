@@ -14,17 +14,17 @@ export class Models extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
-   * Fetch a single model with its latest version resolved into `version`,
-   * plus the full list of its versions in `versions`.
+   * Fetch a single model with its latest version resolved into `version`, plus the
+   * full list of its versions in `versions`.
    */
-  retrieve(platform: string, modelId: string, options?: RequestOptions): APIPromise<Model> {
-    return this._client.get(path`/${platform}/models/${modelId}`, options);
+  retrieve(platform: string, modelID: string, options?: RequestOptions): APIPromise<Model> {
+    return this._client.get(path`/${platform}/models/${modelID}`, options);
   }
 
   /**
-   * Browse the newest model releases on a platform, paginated. This endpoint
-   * lists newest-first only; it does not currently accept search, type, or
-   * base-model filters (use the website search for richer filtering).
+   * Browse the newest model releases on a platform, paginated. This endpoint lists
+   * newest-first only; it does not currently accept search, type, or base-model
+   * filters (use the website search for richer filtering).
    *
    * Only platforms that have model pages are supported. Repo-host platforms
    * (huggingface, tensorfiles, modelscope, modelscope_cn) respond `404`.

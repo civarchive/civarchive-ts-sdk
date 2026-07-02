@@ -16,10 +16,10 @@ export class Versions extends APIResource {
    */
   retrieve(
     platform: string,
-    modelId: string,
-    versionId: string,
+    modelID: string,
+    versionID: string,
     options?: RequestOptions,
   ): APIPromise<ModelsAPI.Model> {
-    return this._client.get(path`/${platform}/models/${modelId}/versions/${versionId}`, options);
+    return this._client.get(path`/${platform}/models/${modelID}/versions/${versionID}`, options);
   }
 }

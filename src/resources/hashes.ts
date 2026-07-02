@@ -11,10 +11,10 @@ import { path } from '../internal/utils/path';
  */
 export class Hashes extends APIResource {
   /**
-   * Return every known mirror of a file (`files`) and every model that uses
-   * it (`models`), keyed by the file's SHA256 hash. Repo-host mirrors
-   * (tensorfiles, huggingface, modelscope) appear in `files` but contribute
-   * no entries to `models` (they have no model pages).
+   * Return every known mirror of a file (`files`) and every model that uses it
+   * (`models`), keyed by the file's SHA256 hash. Repo-host mirrors (tensorfiles,
+   * huggingface, modelscope) appear in `files` but contribute no entries to `models`
+   * (they have no model pages).
    *
    * Never errors on a miss: an unknown hash returns empty `files` and `models`.
    */
