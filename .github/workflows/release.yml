@@ -46,5 +46,3 @@ jobs:
         # Authenticates with the NPM_TOKEN repository secret; --provenance still
         # attaches a build attestation (id-token: write is granted above).
         run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
