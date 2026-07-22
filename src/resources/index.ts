@@ -7,5 +7,6 @@ export {
   type ModelVersion,
   type ModelVersionRef,
   type ModelListResponse,
+  type ModelRetrieveParams,
   type ModelListParams,
 } from './models/models';

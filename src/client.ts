@@ -22,6 +22,7 @@ import {
   Model,
   ModelListParams,
   ModelListResponse,
+  ModelRetrieveParams,
   ModelVersion,
   ModelVersionRef,
   Models,
@@ -721,6 +722,7 @@ export declare namespace Civarchive {
     type ModelVersion as ModelVersion,
     type ModelVersionRef as ModelVersionRef,
     type ModelListResponse as ModelListResponse,
+    type ModelRetrieveParams as ModelRetrieveParams,
     type ModelListParams as ModelListParams,
   };
 
