@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as VersionsAPI from './versions';
-import { Versions } from './versions';
+import { VersionRetrieveParams, Versions } from './versions';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -17,7 +17,8 @@ export class Models extends APIResource {
    * Fetch a single model with its latest version resolved into `version`, plus the
    * full list of its versions in `versions`.
    */
-  retrieve(platform: string, modelID: string, options?: RequestOptions): APIPromise<Model> {
+  retrieve(modelID: string, params: ModelRetrieveParams, options?: RequestOptions): APIPromise<Model> {
+    const { platform } = params;
     return this._client.get(path`/${platform}/models/${modelID}`, options);
   }
 
@@ -374,6 +375,10 @@ export namespace ModelListResponse {
   }
 }
 
+export interface ModelRetrieveParams {
+  platform: string;
+}
+
 export interface ModelListParams {
   /**
    * Page size (1–100).
@@ -393,8 +398,9 @@ export declare namespace Models {
     type ModelVersion as ModelVersion,
     type ModelVersionRef as ModelVersionRef,
     type ModelListResponse as ModelListResponse,
+    type ModelRetrieveParams as ModelRetrieveParams,
     type ModelListParams as ModelListParams,
   };
 
-  export { Versions as Versions };
+  export { Versions as Versions, type VersionRetrieveParams as VersionRetrieveParams };
 }

@@ -15,11 +15,21 @@ export class Versions extends APIResource {
    * `models.retrieve`, but `version` is the requested `version_id`.
    */
   retrieve(
-    platform: string,
-    modelID: string,
     versionID: string,
+    params: VersionRetrieveParams,
     options?: RequestOptions,
   ): APIPromise<ModelsAPI.Model> {
-    return this._client.get(path`/${platform}/models/${modelID}/versions/${versionID}`, options);
+    const { platform, model_id } = params;
+    return this._client.get(path`/${platform}/models/${model_id}/versions/${versionID}`, options);
   }
+}
+
+export interface VersionRetrieveParams {
+  model_id: string;
+
+  platform: string;
+}
+
+export declare namespace Versions {
+  export { type VersionRetrieveParams as VersionRetrieveParams };
 }
